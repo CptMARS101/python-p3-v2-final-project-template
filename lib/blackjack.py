@@ -125,6 +125,9 @@ def play_bj():
                 player_bj_win(player, house, player_chips)
             elif player.value > 21:
                 player_lose(player, house, player_chips)
+            elif player.value < 17:
+                hit_stand(deck, player)
+                show_cards(player, house)
             while house.value < 17:
                 if player.value == 21:
                     player_bj_win(player, house, player_chips)
@@ -137,8 +140,10 @@ def play_bj():
                 house_lose(player, house, player_chips)
             elif house.value > player.value:
                 house_win(player, house, player_chips)
-            elif house.value < player.value:
+            elif house.value < player.value and player.value < 21:
                 player_win(player, house, player_chips)
+            elif player.value > 21:
+                player_lose(player, house, player_chips)
             else:
                 tie(player, house)
         elif player.value > 21 and player.aces:
